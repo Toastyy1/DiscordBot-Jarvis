@@ -24,17 +24,18 @@ module.exports = (client, Discord) => {
 				readCommands(path.join(dir, file));
 			}
 			else {
-				fileArray.push(file);
+				const fileDir = dir.replace('\\', '/');
+				fileArray.push(fileDir + '/' + file);
 				// fs.readdirSync(dir).filter(cmdFile => cmdFile.endsWith('.js'));
 			}
 		}
 	};
 
 
-	readCommands('commands'); // fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+	readCommands('commands');
 
 	for(const file of fileArray) {
-		const command = require(`../commands/${file}`);
+		const command = require(`../${file}`);
 
 		if(command.name) {
 			client.commands.set(command.name, command);
