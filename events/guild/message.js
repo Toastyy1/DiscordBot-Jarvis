@@ -54,7 +54,7 @@ module.exports = (Discord, client, message) => {
 
 	if(!command) return message.reply(`"${content}" ist kein gültiger Befehl!`);
 
-	const {
+	let {
 		permissions = [],
 		permissionError = 'Dir fehlt die Berechtigung, diesen Befehl auszuführen!',
 		requiredRoles = [],
@@ -64,6 +64,14 @@ module.exports = (Discord, client, message) => {
 		execute,
 	} = command;
 
+	// Ensure the permissions are in an array and are all valid
+	if (permissions.length) {
+		if (typeof permissions === 'string') {
+			permissions = [permissions];
+		}
+
+		validatePermissions(permissions);
+	}
 
 	// Ensure the user has the required permissions
 	for (const permission of permissions) {

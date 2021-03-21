@@ -1,7 +1,7 @@
 {
 	"prefix": "!",
-	"token": "ODAyODk1NTAyNTM3Nzg1MzU0.YA14tA.TlBNsFegWPiFpNcbHSik6ZNsRd8",
+	"token": "Your token here",
 	"commandHandler": "command_handler.js",
 	"eventHandler": "event_handler.js",
-	"rootDir": "C:\\Users\\marce\\Documents\\GitHub\\Discord Bot"
+	"rootDir": "Path of the bot's directory"
 }
