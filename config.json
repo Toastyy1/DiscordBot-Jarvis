@@ -1,7 +1,0 @@
-{
-	"prefix": "!",
-	"token": "Your token here",
-	"commandHandler": "command_handler.js",
-	"eventHandler": "event_handler.js",
-	"rootDir": "Path of the bot's directory"
-}
