@@ -1,6 +1,5 @@
-// const { prefix } = require('../../config.json');
-
-const prefix = process.env.PREFIX;
+const { prefix } = require('../../config.json');
+// const prefix = process.env.PREFIX;
 
 const validatePermissions = (permissions) => {
 	const validPermissions = [
