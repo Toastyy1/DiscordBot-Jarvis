@@ -4,11 +4,14 @@
 module.exports = {
 	name: 'server-info',
 	aliases: ['svinfo', 'si'],
-	execute: (message, args, Discord) => {
+	execute: (message, args, Discord, client) => {
 		let serverIconUrl = message.guild.iconURL();
 		const serverName = message.guild.name;
 		const memberCount = message.guild.memberCount;
-        // const serverOwner = message.guild.members.resolveID(message.guild.ownerID);/*fetchMember(message.guild.ownerID).displayName;*/
+        const serverOwner = message.guild.members.resolveID(message.guild.ownerID);/*fetchMember(message.guild.ownerID).displayName;*/
+		// Get a User by ID
+		// client.users.get("user id here");
+		// Returns <User>
 
 		if(!serverIconUrl) {
 			serverIconUrl = 'https://www.pngkey.com/png/full/17-179750_discord-icon-discord-logo.png';
