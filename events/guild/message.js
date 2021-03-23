@@ -111,5 +111,5 @@ module.exports = (Discord, client, message) => {
 		);
 	}
 
-	execute(message, args, Discord, client);
+	execute(message, args, Discord);
 };
