@@ -1,4 +1,6 @@
 const { prefix } = require('../../config.json');
+
+// For server deployment
 // const prefix = process.env.PREFIX;
 
 const validatePermissions = (permissions) => {
@@ -109,5 +111,5 @@ module.exports = (Discord, client, message) => {
 		);
 	}
 
-	execute(message, args, Discord);
+	execute(message, args, Discord, client);
 };
