@@ -40,7 +40,6 @@ const validatePermissions = (permissions) => {
 
 	for (const permission of permissions) {
 		if (!validPermissions.includes(permission)) {
-			console.log('Fehler');
 			// throw new Error(`Unknown permission node "${permission}"`);
 		}
 	}
@@ -92,24 +91,19 @@ module.exports = (Discord, client, message) => {
 
 		if (!role || !member.roles.cache.has(role.id)) {
 			return message.reply(
-				`You must have the "${requiredRole}" role to use this command.`,
+				`Du benötigst die "${requiredRole}" Rolle um diesen Befehl zu benutzen!`,
 			);
 		}
 	}
-
-	// Split on any number of spaces
-	// const args = content.split(/[ ]+/);
-
-	// Remove the command which is the first index
 
 	// Ensure we have the correct number of arguments
 	if (
 		args.length < minArgs || (maxArgs !== null && args.length > maxArgs)
 	) {
 		return message.reply(
-			`Incorrect syntax! Use ${prefix}${command.name} ${expectedArgs}`,
+			`Falscher Syntax! Versuche ${prefix}${command.name} ${expectedArgs}`,
 		);
 	}
 
-	execute(message, args, Discord, client);
+	execute(message, args, Discord);
 };
