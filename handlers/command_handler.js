@@ -7,7 +7,6 @@ module.exports = (client, Discord) => {
 
 	const readCommands = (dir) => {
 
-		// TODO: Find a better solution to determine the project folder
 		const __dirname = rootDir;
 
 		// Read out all command files

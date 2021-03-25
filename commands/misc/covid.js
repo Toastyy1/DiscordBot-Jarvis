@@ -1,4 +1,7 @@
 const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
+const rootDir = path.dirname(require.main.filename);
 
 const validateStateShortcuts = shortCut => {
 	const validShortcuts = [
@@ -46,7 +49,7 @@ module.exports = {
 	expectedArgs: '<Bundesland>',
 	minArgs: 1,
 	maxArgs: 1,
-	execute: async (messgae, args, Discord) => {
+	execute: async (message, args, Discord) => {
 		try {
 			let state = '';
 
@@ -57,8 +60,19 @@ module.exports = {
 					state = validateStateShortcuts(state);
 
 					if(!state) {
-						return messgae.channel.send(`"${args[0].toString()}" ist kein gültiges Bundesland!`);
+						return message.channel.send(`"${args[0].toString()}" ist keine gültige Abkürzung!`);
 					}
+				}
+			}
+
+			const stateFlagsPath = `${rootDir}/State flags`;
+			const stateFlagName = fs.readdirSync(stateFlagsPath).filter(flag => flag == `${state.toLowerCase()}.png`)[0];
+			let stateFlag = '';
+
+
+			for(const flag of fs.readdirSync(stateFlagsPath)) {
+				if(flag == stateFlagName) {
+					stateFlag = `${stateFlagsPath}/${stateFlagName}`
 				}
 			}
 
@@ -69,9 +83,13 @@ module.exports = {
 				.then(res => res.json())
 				.then(data => {
 					const { features } = data;
-					const results = features.filter(filter => filter.attributes.LAN_ew_GEN == state)[0].attributes;
+					const results = features.filter(filter => filter.attributes.LAN_ew_GEN.toLowerCase() == state.toLowerCase())[0];
+					if(!results) {
+						return message.channel.send(`"${state}" ist kein gültiges Bundesland!`);
+					}
+
 					let { Fallzahl, Death, cases7_bl_per_100k,
-						faelle_100000_EW, LAN_ew_GEN, Aktualisierung } = results;
+						faelle_100000_EW, LAN_ew_GEN, Aktualisierung } = results.attributes;
 
 					cases7_bl_per_100k = '~ ' + Intl.NumberFormat().format(Math.round(cases7_bl_per_100k));
 					faelle_100000_EW = '~ ' + Intl.NumberFormat().format(Math.round(faelle_100000_EW));
@@ -89,7 +107,7 @@ module.exports = {
 						},
 
 						thumbnail: {
-							url: coronaIconUrl,
+							url: `attachment://${stateFlagName}`,
 						},
 
 						fields: [
@@ -126,14 +144,17 @@ module.exports = {
 						timestamp: new Date(),
 					};
 
-					messgae.channel.send({ embed: covidEmbed });
+					message.channel.send({ embed: covidEmbed, files: [{
+						attachment: stateFlag,
+						name: stateFlagName
+					}] });
 				})
 				.catch(error => console.log('Error!' + error));
 
 		}
 		catch (error) {
 			console.log('An error occured while executing the covid command: ' + error);
-			messgae.channel.send('Leider ist ein Fehler aufgetreten :(');
+			message.channel.send('Leider ist ein Fehler aufgetreten :(');
 		}
 	},
 };
