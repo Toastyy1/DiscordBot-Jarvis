@@ -77,6 +77,8 @@ module.exports = {
 					faelle_100000_EW = '~ ' + Intl.NumberFormat().format(Math.round(faelle_100000_EW));
 					Fallzahl = '~ ' + Intl.NumberFormat().format(Math.round(Fallzahl));
 					Death = '~ ' + Intl.NumberFormat().format(Math.round(Death));
+					Aktualisierung = new Date(Aktualisierung);
+					Aktualisierung = `${Aktualisierung.getDate()}.${Aktualisierung.getMonth()}.${Aktualisierung.getFullYear()}`;
 
 					const covidEmbed = {
 						color: 0xDC143C,
