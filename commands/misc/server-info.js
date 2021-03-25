@@ -2,11 +2,11 @@ module.exports = {
 	name: 'server-info',
 	aliases: ['svinfo', 'si'],
 	execute: async (message, args, Discord) => {
-	const { name, memberCount, afkTimeout, createdAt } = message.guild;
+		const { name, memberCount, afkTimeout, createdAt } = message.guild;
 
 		let serverIconUrl = message.guild.iconURL();
 		const { username } = await message.client.users.fetch(message.guild.ownerID);
-        const serverOwner = username; 
+		const serverOwner = username;
 
 		if(!serverIconUrl) {
 			serverIconUrl = 'https://www.pngkey.com/png/full/17-179750_discord-icon-discord-logo.png';
@@ -17,38 +17,38 @@ module.exports = {
 			title: name + '\u200b',
 			author: {
 				name: 'Server Informationen',
-				icon_url: serverIconUrl
+				icon_url: serverIconUrl,
 			},
 
 			thumbnail: {
-				url: serverIconUrl
+				url: serverIconUrl,
 			},
 
 			fields: [
 				{
-					name: 'Anzahl benutzer', 
+					name: 'Anzahl benutzer',
 					value: memberCount + '\n\u200b',
-					inline: true
+					inline: true,
 				},
 
 				{
-					name: 'Server Owner', 
-					value: serverOwner, 
-					inline: true
+					name: 'Server Owner',
+					value: serverOwner,
+					inline: true,
 				},
 
 				{
 					name: 'AFK-Timeout',
 					value: afkTimeout / 60 + ' Minuten',
-					inline: true
+					inline: true,
 				},
 
 				{
 					name: 'Erstellt am',
 					value: createdAt,
-					inline: false
-				}
-			]
+					inline: false,
+				},
+			],
 		};
 
 		message.channel.send({ embed: infoEmbed });
