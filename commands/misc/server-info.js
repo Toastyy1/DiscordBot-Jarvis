@@ -2,7 +2,8 @@ module.exports = {
 	name: 'server-info',
 	aliases: ['svinfo', 'si'],
 	execute: async (message, args, Discord) => {
-		const { name, memberCount, afkTimeout, createdAt } = message.guild;
+		let { name, memberCount, afkTimeout, createdAt } = message.guild;
+		createdAt = `${createdAt.getDate()}.${createdAt.getMonth()}.${createdAt.getFullYear()}`;
 
 		let serverIconUrl = message.guild.iconURL();
 		const { username } = await message.client.users.fetch(message.guild.ownerID);
