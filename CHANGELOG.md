@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...HEAD)
 
 ### Added
 -Changelog
@@ -9,7 +9,7 @@
 ### Changed
 -Added the changelog to .gitignore
 
-## [v0.0.4] - 26.03.2021
+## [v0.0.4](https://github.com/Toasty65/Discord-Bot/compare/v0.0.3...v0.0.4) - 26.03.2021
 
 ### Added
 - New command:
@@ -18,7 +18,7 @@
 ### Fixed
 - Date formatting for server-info command
 
-## [v0.0.3] - 24.03.2021
+## [v0.0.3](https://github.com/Toasty65/Discord-Bot/compare/v0.0.2...v0.0.3) - 24.03.2021
 
 ### Added
 - New command:
@@ -27,7 +27,7 @@
 ### Removed
 - Unnecessary files / directories in repository "config.json" and ".vscode"
 
-## [v0.0.2] - 22.03.2021
+## [v0.0.2](https://github.com/Toasty65/Discord-Bot/compare/v0.0.1...v0.0.2) - 22.03.2021
 
 ### Added
 - New commands:
