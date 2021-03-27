@@ -12,27 +12,27 @@
 ## [v0.0.4] - 26.03.2021
 
 ### Added
--New command:
---"covid" show
+- New command:
+    - "covid" shows information about the current corona situation of a federal state in germany
 
 ### Fixed
--Date formatting for server-info command
+- Date formatting for server-info command
 
 ## [v0.0.3] - 24.03.2021
 
 ### Added
--New command:
---"server-info" shows information about the current corona situation of a federal state in germany
+- New command:
+    - "server-info" shows information about the current corona situation of a federal state in germany
 
 ### Removed
--Unnecessary files / directories in repository "config.json" and ".vscode"
+- Unnecessary files / directories in repository "config.json" and ".vscode"
 
 ## [v0.0.2] - 22.03.2021
 
 ### Added
--New commands:
---"msgdelete" can delete messages in a channel
---"add" can sum two numbers 
+- New commands:
+    - "msgdelete" can delete messages in a channel
+    - "add" can sum two numbers 
 
 ### Fixed
--Getting command files
+- Getting command files
