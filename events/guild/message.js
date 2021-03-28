@@ -83,17 +83,27 @@ module.exports = (Discord, client, message) => {
 		}
 	}
 
+	let roleCount = 0;
+	let missingRole = '';
+
 	// Ensure the user has the required roles
 	for (const requiredRole of requiredRoles) {
 		const role = guild.roles.cache.find(
-			(r) => r.name === requiredRole,
+			r => r.name === requiredRole,
 		);
 
-		if (!role || !member.roles.cache.has(role.id)) {
-			return message.reply(
-				`Du benötigst die "${requiredRole}" Rolle um diesen Befehl zu benutzen!`,
-			);
+		if (role && member.roles.cache.has(role.id)) {
+			roleCount++;
 		}
+		else {
+			missingRole = requiredRole;
+		}
+	}
+	
+	if(roleCount === 0 && requiredRoles.length > 0) {
+		return message.reply(
+			`Du benötigst die "${missingRole}" Rolle um diesen Befehl zu benutzen!`,
+		);
 	}
 
 	// Ensure we have the correct number of arguments
@@ -105,5 +115,8 @@ module.exports = (Discord, client, message) => {
 		);
 	}
 
-	execute(message, args, Discord);
+	message.channel.bulkDelete(1).catch(err => {
+		console.error(err);
+		message.channel.send('Beim löschen des eingegebenen Befehls ist ein Fehler aufgetreten');
+	}).then(execute(message, args, Discord));
 };
