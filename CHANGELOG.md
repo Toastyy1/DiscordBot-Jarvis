@@ -2,12 +2,6 @@
 
 ## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...HEAD)
 
-### Added
-- Changelog
-- New command "update" which will show the changelog in a embed
-
-### Changed
-- Added the changelog to .gitignore
 
 ## [v0.0.5](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...v0.0.5)
 
