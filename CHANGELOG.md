@@ -9,6 +9,18 @@
 ### Changed
 - Added the changelog to .gitignore
 
+## [v0.0.5](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...v0.0.5)
+
+### Added
+- New command:
+    - "update" shows the changelog in channel
+
+### Fixed
+- A bug requiring all in "requiredRoles" defined roles instead of requiring just one of them
+
+### Changed
+- After submitting a valid command, the message containing the command will now be deleted
+
 ## [v0.0.4](https://github.com/Toasty65/Discord-Bot/compare/v0.0.3...v0.0.4) - 26.03.2021
 
 ### Added
