@@ -10,5 +10,20 @@ module.exports = {
 
 		const data = fs.readFileSync(changelogPath, 'utf-8');
 		console.log(data.toString());
+
+		const changelogEmbed = {
+			author: {
+				name: 'Changelog',
+			},
+
+			fields: [
+				{
+					name: 'Test',
+					value: data.toString(),
+				}
+			]
+		};
+
+		message.channel.send({embed: changelogEmbed})
 	},
 };
