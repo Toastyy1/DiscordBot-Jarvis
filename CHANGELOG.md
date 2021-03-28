@@ -3,7 +3,7 @@
 ## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...HEAD)
 
 
-## [v0.0.5](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...v0.0.5)
+## [v0.0.5](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...v0.0.5) - 28.03.2021
 
 ### Added
 - New command:
