@@ -23,5 +23,4 @@ module.exports = {
 		});
 	},
 	permissions: 'ADMINISTRATOR',
-	requiredRoles: [],
 };
