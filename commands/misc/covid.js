@@ -66,13 +66,13 @@ module.exports = {
 			}
 
 			const stateFlagsPath = `${rootDir}/State flags`;
-			const stateFlagName = fs.readdirSync(stateFlagsPath).filter(flag => flag == `${state.toLowerCase()}.png`)[0];
+			const stateFlagName = fs.readdirSync(stateFlagsPath).filter(flag => flag == `${state.toLowerCase().replace('ü', 'ue')}.png`)[0];
 			let stateFlag = '';
 
 
 			for(const flag of fs.readdirSync(stateFlagsPath)) {
 				if(flag == stateFlagName) {
-					stateFlag = `${stateFlagsPath}/${stateFlagName}`
+					stateFlag = `${stateFlagsPath}\\${stateFlagName}`;
 				}
 			}
 
@@ -83,7 +83,7 @@ module.exports = {
 				.then(res => res.json())
 				.then(data => {
 					const { features } = data;
-					const results = features.filter(filter => filter.attributes.LAN_ew_GEN.toLowerCase() == state.toLowerCase())[0];
+					const results = features.filter(filter => filter.attributes.LAN_ew_GEN.toLowerCase() == state.toLowerCase().replace('ue', 'ü'))[0];
 					if(!results) {
 						return message.channel.send(`"${state}" ist kein gültiges Bundesland!`);
 					}
