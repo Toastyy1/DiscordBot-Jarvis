@@ -72,7 +72,7 @@ module.exports = {
 
 			for(const flag of fs.readdirSync(stateFlagsPath)) {
 				if(flag == stateFlagName) {
-					stateFlag = `${stateFlagsPath}\\${stateFlagName}`;
+					stateFlag = `${stateFlagsPath}/${stateFlagName}`;
 				}
 			}
 
