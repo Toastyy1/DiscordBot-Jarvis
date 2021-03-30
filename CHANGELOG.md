@@ -3,6 +3,15 @@
 ## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...HEAD)
 
 
+## [v0.0.6](https://github.com/Toasty65/Discord-Bot/compare/v0.0.5...v0.0.6) - 30.03.2021
+
+### Added
+- New command:
+    - "create-webhook" simply creates a new webhook
+
+### Changed
+- Formatting for a few commands
+
 ## [v0.0.5](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...v0.0.5) - 28.03.2021
 
 ### Added

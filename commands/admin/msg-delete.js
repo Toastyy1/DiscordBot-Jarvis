@@ -5,7 +5,7 @@ module.exports = {
 	permissionError: 'You need admin permissions to run this command',
 	minArgs: 1,
 	maxArgs: 1,
-	execute: (message, args, text) => {
+	execute: (message, args, Discord) => {
 		const amount = parseInt(args[0]) + 1;
 		if (!args.length > 0) {
 			return message.channel.send('Parameter fehlen! ;)');
