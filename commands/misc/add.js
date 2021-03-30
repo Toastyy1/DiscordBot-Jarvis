@@ -5,7 +5,7 @@ module.exports = {
 	permissionError: 'You need admin permissions to run this command',
 	minArgs: 2,
 	maxArgs: 2,
-	execute: (message, args, text) => {
+	execute: (message, args, Discord) => {
 		const num1 = +parseInt(args[0]);
 		const num2 = +parseInt(args[1]);
 
