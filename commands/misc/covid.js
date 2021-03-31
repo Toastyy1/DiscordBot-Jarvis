@@ -49,6 +49,7 @@ module.exports = {
 	expectedArgs: '<Bundesland>',
 	minArgs: 1,
 	maxArgs: 1,
+	guildOnly: true,
 	execute: async (message, args, Discord) => {
 		try {
 			let state = '';
