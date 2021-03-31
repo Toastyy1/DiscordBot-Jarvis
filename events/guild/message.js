@@ -64,7 +64,10 @@ module.exports = (Discord, client, message) => {
 		maxArgs = null,
 		expectedArgs = '',
 		execute,
+		guildOnly,
 	} = command;
+
+	if(guildOnly && message.channel.type === 'dm') return message.reply('Dieser Befehl funktioniert nur auf einem Server!');
 
 	// Ensure the permissions are in an array and are all valid
 	if (permissions.length) {

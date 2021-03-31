@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'server-info',
 	aliases: ['svinfo', 'si'],
+	guildOnly: true,
 	execute: async (message, args, Discord) => {
 		let { name, memberCount, afkTimeout, createdAt } = message.guild;
 		createdAt = `${createdAt.getDate()}.${createdAt.getMonth()}.${createdAt.getFullYear()}`;

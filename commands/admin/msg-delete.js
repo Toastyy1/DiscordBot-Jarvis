@@ -5,6 +5,7 @@ module.exports = {
 	permissionError: 'You need admin permissions to run this command',
 	minArgs: 1,
 	maxArgs: 1,
+	guildOnly: true,
 	execute: (message, args, Discord) => {
 		const amount = parseInt(args[0]) + 1;
 		if (!args.length > 0) {
