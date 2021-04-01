@@ -7,8 +7,8 @@ module.exports = {
     maxArgs: 1,
     expectedArgs: '<Your channel name>',
     execute: async (message, args, Discord, client) => {
-      const clientID = 'Your client id';
-      const clientSecret = 'Your client secret';
+      const clientID = process.env.TWITCHCLIENTID;
+      const clientSecret = process.env.TWITCHCLIENTSECRET;
       const streamer = args[0].toString();
 
       let twitchEmbed = new discord.MessageEmbed();
