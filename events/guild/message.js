@@ -118,5 +118,8 @@ module.exports = (Discord, client, message) => {
 	message.channel.bulkDelete(1).catch(err => {
 		console.error(err);
 		message.channel.send('Beim löschen des eingegebenen Befehls ist ein Fehler aufgetreten');
-	}).then(execute(message, args, Discord));
+	})
+	.then(message.channel.startTyping())
+	.then(execute(message, args, Discord, client))
+	.then(message.channel.stopTyping());
 };
