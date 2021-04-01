@@ -1,7 +1,9 @@
 # Changelog
 
-## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.4...HEAD)
+## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.6...HEAD)
 
+### Added
+- Basic Twitch API access
 
 ## [v0.0.6](https://github.com/Toasty65/Discord-Bot/compare/v0.0.5...v0.0.6) - 30.03.2021
 
