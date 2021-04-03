@@ -6,7 +6,7 @@ module.exports = {
 	minArgs: 2,
 	guildOnly: true,
 	// maxArgs: 2,
-	execute: async (message, args, Discord) => {
+	execute: async (message, args) => {
 		const webhookName = args[0].toString();
 		const channelID = args[1].toString();
 		let iconUrl = '';
@@ -22,6 +22,6 @@ module.exports = {
 			.then(webhook => webhook.edit(webhookName, iconUrl)
 				.catch(error => console.log(`Error: ${error}`)
 					.then(message.channel.send('Ein Fehler ist aufgetreten :(')))
-				.finally(message.channel.send('Webhook erfolgreich erstellt!')));
+					.then(message.channel.send('Webhook erfolgreich erstellt!')));
 	},
 };

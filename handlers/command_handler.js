@@ -5,7 +5,7 @@ const rootDir = path.dirname(require.main.filename);
 module.exports = (client, Discord) => {
 	const fileArray = [];
 
-	const readCommands = (dir) => {
+	function readCommands(dir) {
 
 		const __dirname = rootDir;
 
@@ -28,7 +28,7 @@ module.exports = (client, Discord) => {
 				// fs.readdirSync(dir).filter(cmdFile => cmdFile.endsWith('.js'));
 			}
 		}
-	};
+	}
 
 
 	readCommands('commands');

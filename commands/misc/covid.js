@@ -50,7 +50,7 @@ module.exports = {
 	minArgs: 1,
 	maxArgs: 1,
 	guildOnly: true,
-	execute: async (message, args, Discord) => {
+	execute: async (message, args) => {
 		try {
 			let state = '';
 
