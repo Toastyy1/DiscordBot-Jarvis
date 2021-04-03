@@ -1,3 +1,4 @@
+require('dotenv').config();
 const discord = require('discord.js');
 const fetch = require('node-fetch');
 
@@ -7,8 +8,8 @@ module.exports = {
 	maxArgs: 1,
 	expectedArgs: '<Your channel name>',
 	execute: async (message, args, Discord, client) => {
-		const clientID = '3ror5a99eilg2qh0z45v7y17didoom';
-		const clientSecret = '4db2bxr67ifa5dmdpwymh51el2kd4a';
+		const clientID = process.env.TWITCHCLIENTID;
+		const clientSecret = process.env.TWITCHCLIENTSECRET;
 		const streamer = args[0].toString();
 
 		const twitchEmbed = new discord.MessageEmbed();
@@ -30,7 +31,7 @@ module.exports = {
 				})
 					.then(x => x.json())
 					.then(x => {
-						if(!data) return message.reply(`Den Twitch-Channel ${streamer} gibt es nicht!`);
+						if(!x.data) return message.reply(`Den Twitch-Channel ${streamer} gibt es nicht!`);
 
 						const broadcaster = x.data.filter(filter => filter.display_name.toLowerCase() === streamer.toLowerCase())[0];
 
