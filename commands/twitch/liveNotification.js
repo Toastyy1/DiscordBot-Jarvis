@@ -7,7 +7,7 @@ module.exports = {
 	minArgs: 1,
 	maxArgs: 1,
 	expectedArgs: '<Your channel name>',
-	execute: async (message, args, Discord, client) => {
+	execute: async (message, args) => {
 		const clientID = process.env.TWITCHCLIENTID;
 		const clientSecret = process.env.TWITCHCLIENTSECRET;
 		const streamer = args[0].toString();
@@ -19,8 +19,6 @@ module.exports = {
 		}).then(res => res.json())
 			.then(data => {
 				const authToken = data.access_token;
-				console.log('authToken: ' + authToken);
-				console.log('clientId: ' + clientID);
 
 				fetch(`https://api.twitch.tv/helix/search/channels?query=${streamer}`, {
 					method: 'GET',
@@ -34,14 +32,32 @@ module.exports = {
 						if(!x.data) return message.reply(`Den Twitch-Channel ${streamer} gibt es nicht!`);
 
 						const broadcaster = x.data.filter(filter => filter.display_name.toLowerCase() === streamer.toLowerCase())[0];
+						let gameName = '';
+						let streamStart = new Date(broadcaster.started_at);
+						streamStart = `${streamStart.getDate()}.${streamStart.getMonth()}.${streamStart.getFullYear()}, ${streamStart.getHours()}:${streamStart.getMinutes()}`;
 
-						const isLive = broadcaster.is_live;
-						twitchEmbed.setTitle(broadcaster.display_name);
-						twitchEmbed.addFields(
-							{ name: 'Ist live?', value: isLive },
-						);
-
-						message.channel.send(twitchEmbed);
+						fetch(`https://api.twitch.tv/helix/games?id=${broadcaster.game_id}`, {
+							method: 'GET',
+							headers: {
+								'CLIENT-ID': clientID,
+								'Authorization': 'Bearer ' + authToken,
+							},
+						})
+							.then(gameInfo => gameInfo.json())
+							.then(gameInfo => {
+								gameName = gameInfo.data[0].name;
+								twitchEmbed.setAuthor(`${broadcaster.display_name} is live on twitch!`, broadcaster.thumbnail_url);
+								twitchEmbed.setColor(0x6441a5);
+								twitchEmbed.setTitle(broadcaster.title);
+								twitchEmbed.setDescription(`https://www.twitch.tv/${broadcaster.display_name}`);
+								twitchEmbed.addFields(
+									{ name: 'Playing', value: gameName, inline: true },
+									{ name: 'Started at', value: streamStart, inline: true },
+								);
+								twitchEmbed.setImage(`https://static-cdn.jtvnw.net/previews-ttv/live_user_${broadcaster.display_name.toLowerCase()}-1280x720.jpg`);
+								twitchEmbed.setTimestamp();
+								message.channel.send(twitchEmbed);
+							});
 					});
 			});
 	},
