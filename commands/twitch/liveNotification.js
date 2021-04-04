@@ -7,6 +7,7 @@ module.exports = {
 	minArgs: 1,
 	maxArgs: 1,
 	expectedArgs: '<Your channel name>',
+	guildOnly: true,
 	execute: async (message, args) => {
 		const clientID = process.env.TWITCHCLIENTID;
 		const clientSecret = process.env.TWITCHCLIENTSECRET;
