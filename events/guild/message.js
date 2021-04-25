@@ -49,8 +49,9 @@ module.exports = (Discord, client, message) => {
 	if(!content.startsWith(prefix) || message.author.bot) return;
 
 	const args = content.slice(prefix.length).split(/ +/);
-	const cmd = args.shift().toLowerCase();
-	const command = message.client.commands.get(cmd);
+	const cmdName = args.shift().toLowerCase();
+	const command = message.client.commands.get(cmdName)
+       || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
 	if(!command) return message.reply(`"${content}" ist kein gültiger Befehl!`);
 
