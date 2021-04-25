@@ -7,7 +7,7 @@ module.exports = {
 	name: 'update',
 	requiredRoles: ['Mods', 'Coder'],
 	guildOnly: true,
-	execute: (message, args, Discord) => {
+	execute: (message, args) => {
 		const changelogPath = `${rootDir}/CHANGELOG.md`;
 
 		const data = '```' + fs.readFileSync(changelogPath, 'utf-8') + '```';

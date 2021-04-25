@@ -6,7 +6,7 @@ module.exports = {
 	minArgs: 2,
 	maxArgs: 2,
 	guildOnly: true,
-	execute: (message, args, Discord) => {
+	execute: (message, args) => {
 		const num1 = +parseInt(args[0]);
 		const num2 = +parseInt(args[1]);
 

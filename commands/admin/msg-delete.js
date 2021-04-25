@@ -6,7 +6,7 @@ module.exports = {
 	minArgs: 1,
 	maxArgs: 1,
 	guildOnly: true,
-	execute: (message, args, Discord) => {
+	execute: (message, args) => {
 		const amount = parseInt(args[0]) + 1;
 		if (!args.length > 0) {
 			return message.channel.send('Parameter fehlen! ;)');
