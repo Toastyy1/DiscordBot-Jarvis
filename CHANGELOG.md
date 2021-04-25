@@ -1,9 +1,12 @@
 # Changelog
 
-## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.6...HEAD)
+## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.7...HEAD)
 
-### Added
-- Basic Twitch API access
+
+## [v0.0.7](https://github.com/Toasty65/Discord-Bot/compare/v0.0.6...v0.0.7) - 26.04.2021
+
+### Removed
+-Covid command (Outsourced into a seperate bot: https://github.com/Toasty65/Jarvis-CovidGermany)
 
 ## [v0.0.6](https://github.com/Toasty65/Discord-Bot/compare/v0.0.5...v0.0.6) - 30.03.2021
 
