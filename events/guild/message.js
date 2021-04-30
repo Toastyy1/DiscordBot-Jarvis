@@ -1,4 +1,5 @@
 require('dotenv').config();
+const censor = require('chat-censoring');
 const prefix = process.env.PREFIX;
 
 const validatePermissions = (permissions) => {
@@ -38,7 +39,7 @@ const validatePermissions = (permissions) => {
 
 	for (const permission of permissions) {
 		if (!validPermissions.includes(permission)) {
-			// throw new Error(`Unknown permission node "${permission}"`);
+			throw new Error(`Unknown permission node "${permission}"`);
 		}
 	}
 };
@@ -46,7 +47,14 @@ const validatePermissions = (permissions) => {
 module.exports = (Discord, client, message) => {
 	const { member, content, guild } = message;
 
-	if(!content.startsWith(prefix) || message.author.bot) return;
+	if(!content.startsWith(prefix) || message.author.bot) {
+		if(censor.checkMessage(content)) {
+			message.delete()
+				.then(() => message.channel.send(`${message.author} said: ${censor.censorMessage(content, '#')}`))
+				.catch(console.error());
+		}
+		return;
+	}
 
 	const args = content.slice(prefix.length).split(/ +/);
 	const cmdName = args.shift().toLowerCase();
@@ -101,7 +109,7 @@ module.exports = (Discord, client, message) => {
 			missingRole = requiredRole;
 		}
 	}
-	
+
 	if(roleCount === 0 && requiredRoles.length > 0) {
 		return message.reply(
 			`Du benötigst die "${missingRole}" Rolle um diesen Befehl zu benutzen!`,
@@ -121,7 +129,7 @@ module.exports = (Discord, client, message) => {
 		console.error(err);
 		message.channel.send('Beim löschen des eingegebenen Befehls ist ein Fehler aufgetreten');
 	})
-	.then(message.channel.startTyping())
-	.then(execute(message, args, Discord, client))
-	.then(message.channel.stopTyping());
+		.then(() => message.channel.startTyping())
+		.then(() => execute(message, args, Discord, client))
+		.then(() => message.channel.stopTyping());
 };

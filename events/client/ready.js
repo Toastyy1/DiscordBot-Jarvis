@@ -1,4 +1,5 @@
 module.exports = client => {
-	client.user.setActivity('Diener');
-	console.log('Bot ist online!');
+	const guildCount = client.guilds.cache.size > 1 ? `Serves on ${client.guilds.cache.size} servers` : `Serves on ${client.guilds.cache.size} server`;
+	client.user.setActivity(guildCount);
+	console.log('Bot is online!');
 };
