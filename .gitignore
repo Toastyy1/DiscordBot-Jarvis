@@ -1,6 +1,7 @@
 .vscode
 config.json
 .env
+.icons
 
 # Logs
 logs
@@ -90,3 +91,5 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+icons/
