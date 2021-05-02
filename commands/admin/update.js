@@ -5,7 +5,7 @@ const rootDir = path.dirname(require.main.filename);
 
 module.exports = {
 	name: 'update',
-	requiredRoles: ['Mods', 'Coder'],
+	requiredRoles: ['💻 Coder [Admin]', '💻 Coder', '👨🏽‍💻 Moderator'],
 	guildOnly: true,
 	execute: (message, args) => {
 		const changelogPath = `${rootDir}/CHANGELOG.md`;

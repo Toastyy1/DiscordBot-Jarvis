@@ -129,7 +129,7 @@ module.exports = (Discord, client, message) => {
 		);
 	}
 
-	message.delete().catch(err => {
+	message.channel.bulkDelete(1).catch(err => {
 		console.error(err);
 		message.channel.send('An error has occurred while deleting the entered command!');
 	})
