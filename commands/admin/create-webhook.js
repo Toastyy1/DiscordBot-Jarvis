@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'create-webhook',
 	permissions: ['ADMINISTRATOR'],
-	expectedArgs: '<Name des WebHooks> <Channel ID> (<Link zu einem Icon für den WebHook>)',
+	expectedArgs: '<Name of the WebHooks> <Channel ID> (<Link to an icon for the WebHook>.)',
 	permissionError: 'You need admin permissions to run this command',
 	minArgs: 2,
 	guildOnly: true,
@@ -14,14 +14,14 @@ module.exports = {
 			iconUrl = args[2].toString();
 		}
 
-		if(iconUrl && !iconUrl.includes('https://')) return message.channel.send('Der Link zum Icon ist nicht gültig!');
+		if(iconUrl && !iconUrl.includes('https://')) return message.channel.send('The link to the icon is not valid!');
 
 		const targetChannel = await message.client.channels.fetch(channelID);
 
 		targetChannel.createWebhook(webhookName, iconUrl)
 			.then(webhook => webhook.edit(webhookName, iconUrl)
-				.catch(error => console.log(`Error: ${error}`)
-					.then(message.channel.send('Ein Fehler ist aufgetreten :(')))
-					.then(message.channel.send('Webhook erfolgreich erstellt!')));
+				.catch(error => console.log(`An error has occurred while creating a webhook: ${error}`)
+					.then(message.channel.send('Unfortunately an error has occurred :(')))
+				.then(message.channel.send('Webhook created successfully!')));
 	},
 };

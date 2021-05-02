@@ -12,6 +12,6 @@ module.exports = {
 
 		const data = '```' + fs.readFileSync(changelogPath, 'utf-8') + '```';
 
-		message.channel.send(data)
+		message.channel.send(data);
 	},
 };
