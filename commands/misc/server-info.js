@@ -28,7 +28,7 @@ module.exports = {
 
 			fields: [
 				{
-					name: 'Anzahl benutzer',
+					name: 'Member count',
 					value: memberCount + '\n\u200b',
 					inline: true,
 				},
@@ -41,12 +41,12 @@ module.exports = {
 
 				{
 					name: 'AFK-Timeout',
-					value: afkTimeout / 60 + ' Minuten',
+					value: afkTimeout / 60 + ' Minutes',
 					inline: true,
 				},
 
 				{
-					name: 'Erstellt am',
+					name: 'Created on',
 					value: createdAt,
 					inline: false,
 				},

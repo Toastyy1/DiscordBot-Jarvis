@@ -34,7 +34,7 @@ module.exports = {
 					.then((x) => {
 						if (!x.data) {
 							return message.reply(
-								`Den Twitch-Channel ${streamer} gibt es nicht!`,
+								`The Twitch-Channel ${streamer} does not exist!`,
 							);
 						}
 
@@ -78,11 +78,11 @@ module.exports = {
 									twitchEmbed.setTimestamp();
 								}
 								catch (error) {
-									console.log('An error occured: ' + error);
+									console.log('An error has occured while processing the game info: ' + error);
 									return message.channel.send({
 										embed: {
 											title: 'Error',
-											description: 'Unfortunately an error occured!',
+											description: 'Unfortunately an error has occured!',
 											color: 0xff0000,
 										},
 									});

@@ -48,10 +48,14 @@ module.exports = (Discord, client, message) => {
 	const { member, content, guild } = message;
 
 	if(!content.startsWith(prefix) || message.author.bot) {
+
 		if(censor.checkMessage(content)) {
 			message.delete()
 				.then(() => message.channel.send(`${message.author} said: ${censor.censorMessage(content, '#')}`))
-				.catch(console.error());
+				.catch(err => {
+					console.log('An error occurred while censoring a message: ' + err);
+					return message.channel.send('Unfortunately an error has occurred :(');
+				});
 		}
 		return;
 	}
@@ -61,11 +65,11 @@ module.exports = (Discord, client, message) => {
 	const command = message.client.commands.get(cmdName)
        || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
-	if(!command) return message.reply(`"${content}" ist kein gültiger Befehl!`);
+	if(!command) return message.reply(`"${content}" is not a valid command!`);
 
 	let {
 		permissions = [],
-		permissionError = 'Dir fehlt die Berechtigung, diesen Befehl auszuführen!',
+		permissionError = 'You are not authorized to execute this command!',
 		requiredRoles = [],
 		minArgs = 0,
 		maxArgs = null,
@@ -74,7 +78,7 @@ module.exports = (Discord, client, message) => {
 		guildOnly,
 	} = command;
 
-	if(guildOnly && message.channel.type === 'dm') return message.reply('Dieser Befehl funktioniert nur auf einem Server!');
+	if(guildOnly && message.channel.type === 'dm') return message.reply('This command works only on a server!');
 
 	// Ensure the permissions are in an array and are all valid
 	if (permissions.length) {
@@ -112,7 +116,7 @@ module.exports = (Discord, client, message) => {
 
 	if(roleCount === 0 && requiredRoles.length > 0) {
 		return message.reply(
-			`Du benötigst die "${missingRole}" Rolle um diesen Befehl zu benutzen!`,
+			`You need the "${missingRole}" role to use this command!`,
 		);
 	}
 
@@ -121,13 +125,13 @@ module.exports = (Discord, client, message) => {
 		args.length < minArgs || (maxArgs !== null && args.length > maxArgs)
 	) {
 		return message.reply(
-			`Falscher Syntax! Versuche ${prefix}${command.name} ${expectedArgs}`,
+			`Wrong syntax! Try ${prefix}${command.name} ${expectedArgs}`,
 		);
 	}
 
-	message.channel.bulkDelete(1).catch(err => {
+	message.delete().catch(err => {
 		console.error(err);
-		message.channel.send('Beim löschen des eingegebenen Befehls ist ein Fehler aufgetreten');
+		message.channel.send('An error has occurred while deleting the entered command!');
 	})
 		.then(() => message.channel.startTyping())
 		.then(() => execute(message, args, Discord, client))

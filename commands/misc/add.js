@@ -14,7 +14,7 @@ module.exports = {
 			return message.reply(`The sum is ${num1 + num2}`);
 		}
 
-		message.reply('Einer der angegebenen Parameter ist keine Zahl!');
+		message.reply('One of the specified parameters is not a number!');
 	},
 	permissions: 'ADMINISTRATOR',
 	requiredRoles: '',
