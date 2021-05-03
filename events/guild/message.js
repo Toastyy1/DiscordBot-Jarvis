@@ -47,7 +47,9 @@ const validatePermissions = (permissions) => {
 module.exports = (Discord, client, message) => {
 	const { member, content, guild } = message;
 
-	if(!content.startsWith(prefix) || message.author.bot) {
+	if(message.author.bot) return;
+
+	if(!content.startsWith(prefix)) {
 
 		if(censor.checkMessage(content)) {
 			message.delete()
@@ -129,11 +131,10 @@ module.exports = (Discord, client, message) => {
 		);
 	}
 
-	message.channel.bulkDelete(1).catch(err => {
-		console.error(err);
-		message.channel.send('An error has occurred while deleting the entered command!');
-	})
-		.then(() => message.channel.startTyping())
-		.then(() => execute(message, args, Discord, client))
-		.then(() => message.channel.stopTyping());
+	message.delete()
+		.then(() => {
+			message.channel.startTyping();
+			execute(message, args, Discord, client);
+		})
+		.then(() => message.channel.stopTyping(true));
 };
