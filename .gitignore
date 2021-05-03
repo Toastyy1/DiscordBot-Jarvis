@@ -1,8 +1,11 @@
 .vscode
 config.json
 CHANGELOG.md
+<<<<<<< HEAD
 .env
 .icons
+=======
+>>>>>>> hotfixes
 
 # Logs
 logs
