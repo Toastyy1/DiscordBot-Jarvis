@@ -14,7 +14,7 @@ module.exports = (client, Discord, member) => {
 						inline: true,
 					},
 					{
-						name: `Welcome ${member.displayName}!`,
+						name: 'Welcome ' + '`' + member.displayName + '`' + '!',
 						value: 'Be respectful and polite & enjoy your stay!',
 						inline: true,
 					},
