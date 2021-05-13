@@ -1,4 +1,6 @@
 module.exports = (client, Discord, member) => {
+	const basicRoles = ['827285756615458837', '841081335455678464'];
+
 	client.channels.cache.get(process.env.MEMBERUPDATECHANNEL)
 		.send({
 			embed: {
@@ -30,4 +32,6 @@ module.exports = (client, Discord, member) => {
 				timestamp: new Date(),
 			},
 		});
+
+	member.roles.add(basicRoles).catch(err => console.log('An error has occured while adding basic roles to a new member! ' + err));
 };

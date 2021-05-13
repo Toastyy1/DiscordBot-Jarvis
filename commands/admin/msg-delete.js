@@ -7,7 +7,7 @@ module.exports = {
 	maxArgs: 1,
 	guildOnly: true,
 	execute: (message, args) => {
-		const amount = parseInt(args[0]) + 1;
+		const amount = parseInt(args[0]);
 		if (!args.length > 0) {
 			return message.channel.send('Missing parameters! ;)');
 		}
