@@ -1,11 +1,9 @@
 .vscode
 config.json
 CHANGELOG.md
-<<<<<<< HEAD
 .env
 .icons
-=======
->>>>>>> hotfixes
+.testCommands
 
 # Logs
 logs
@@ -97,3 +95,5 @@ typings/
 .dynamodb/
 
 icons/
+
+commands/testCommands/
