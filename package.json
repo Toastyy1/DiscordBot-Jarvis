@@ -12,10 +12,10 @@
   "author": "Marcel Neber",
   "license": "ISC",
   "dependencies": {
-    "chat-censoring": "^1.0.1",
+    "chat-censoring": "^1.0.4",
     "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "eslint": "^7.18.0",
+    "dotenv": "^8.6.0",
+    "eslint": "^7.26.0",
     "fs": "^0.0.1-security",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7"
