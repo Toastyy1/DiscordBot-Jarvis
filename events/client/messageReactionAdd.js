@@ -7,10 +7,12 @@ module.exports = async (client, Discord, reaction, user) => {
 		return console.log('An error has occured while handling the "messageReactionAdd" event: ' + e);
 	}
 
+	if(user.bot) return;
 	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const memberName = member.displayName;
+	const memberRoles = member.roles.cache.map(role => role.id);
 
 	switch (reaction.message.id) {
 	case '845078187393941505':
@@ -39,6 +41,36 @@ module.exports = async (client, Discord, reaction, user) => {
 		}
 
 		reaction.users.remove(member);
+		break;
+	case '845101137816059934':
+		switch (reaction.emoji.name) {
+		case 'developer':
+			// Assigns the 'Coder' role to the member
+			member.roles.add('827332590620246056').catch(console.error());
+			break;
+		case 'stackoverflow':
+			// Assigns the 'StackOverflow' role to the member
+			member.roles.add('835926532723703849').catch(console.error());
+			break;
+		case 'age16':
+			// Assigns the '16+' role to the member
+			member.roles.add('827622099270762507').catch(console.error());
+			break;
+		case 'age18':
+			// Assigns the '18+' role to the member
+			member.roles.add('827622498689351711').catch(console.error());
+			break;
+		case 'csgo':
+			// Assigns the 'CSGO' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('841083180097208340');
+			}).catch(console.error());
+			break;
+
+		default:
+			break;
+		}
+
 		break;
 
 	default:
