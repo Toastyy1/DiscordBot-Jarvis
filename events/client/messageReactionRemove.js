@@ -39,10 +39,10 @@ module.exports = async (client, Discord, reaction, user) => {
 	];
 
 	if(reaction.message.id === process.env.ROLECLAIMMESSAGE) {
-		reaction.message.reactions.cache.forEach(r => {
-			if(reaction.emoji.name === r.emoji.name) {
-				member.roles.remove(reactionRoles.find(rr => rr.reaction === reaction.emoji.name).role).catch(console.error());
-			}
-		});
+		member.roles
+			.remove(
+				reactionRoles.find((rr) => rr.reaction === reaction.emoji.name).role,
+			)
+			.catch(console.error());
 	}
 };
