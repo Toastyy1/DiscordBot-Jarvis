@@ -12,7 +12,6 @@ module.exports = async (client, Discord, reaction, user) => {
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const memberName = member.displayName;
-	const memberRoles = member.roles.cache.map(role => role.id);
 
 	switch (reaction.message.id) {
 	case '845078187393941505':
