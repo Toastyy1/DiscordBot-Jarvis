@@ -2,6 +2,17 @@
 
 ## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.8...HEAD)
 
+## [v0.0.8.1](https://github.com/Toasty65/Discord-Bot/compare/v0.0.8...v0.0.8.1) - 21.05.2021
+
+### Added
+- Some error prevention to the auto role assignment
+
+### Fixed
+- Some logic
+
+### Removed
+- Auto role assignment on server join
+
 ## [v0.0.8](https://github.com/Toasty65/Discord-Bot/compare/v0.0.7...v0.0.8) - 21.05.2021
 
 ### Added
