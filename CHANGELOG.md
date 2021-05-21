@@ -1,12 +1,27 @@
 # Changelog
 
-## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.7...HEAD)
+## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.8...HEAD)
 
+## [v0.0.8](https://github.com/Toasty65/Discord-Bot/compare/v0.0.7...v0.0.8) - 21.05.2021
+
+### Added
+- Auto role assignment based on message reactions
+- Chat censoring
+- Auto-message if a user joins / leaves the server
+
+### Removed
+- Procfile (because of self-hosting)
+
+### Changed
+- Language from German to English (translated everything)
+
+### Fixed
+- Bug #8
 
 ## [v0.0.7](https://github.com/Toasty65/Discord-Bot/compare/v0.0.6...v0.0.7) - 26.04.2021
 
 ### Removed
--Covid command (Outsourced into a seperate bot: https://github.com/Toasty65/Jarvis-CovidGermany)
+- Covid command (Outsourced into a seperate bot: https://github.com/Toasty65/Jarvis-CovidGermany)
 
 ## [v0.0.6](https://github.com/Toasty65/Discord-Bot/compare/v0.0.5...v0.0.6) - 30.03.2021
 
