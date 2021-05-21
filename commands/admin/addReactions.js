@@ -10,8 +10,8 @@ module.exports = {
 		const targetMessage = await message.channel.messages.fetch(args[0]);
 		const reactions = args.slice(1);
 
-		reactions.forEach(async reaction => {
+		for (const reaction of reactions) {
 			await targetMessage.react(reaction);
-		});
+		}
 	},
 };
