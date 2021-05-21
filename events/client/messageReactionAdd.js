@@ -17,18 +17,28 @@ module.exports = async (client, Discord, reaction, user) => {
 		if(member.roles.cache.size <= 1) {
 			if(reaction.emoji.name === '✅') {
 				// Assigns the 'Roles:' role to the member
-				await member.roles.add('841081335455678464');
+				member.roles.add('841081335455678464').then(() => {
 
-				// Assigns the 'User' role to the member
-				await member.roles.add('827285756615458837');
+					// Assigns the 'User' role to the member
+					member.roles.add('827285756615458837');
+				}).catch((err) => {
+					console.log('An error has occured while adding the basic roles to a new member: ' + err);
+					reaction.message.channel.send('Unfortunately, I wasn\'t able to assign you your roles. Try again or report the problem');
+				});
+
 			}
 			else if(reaction.emoji.name === '❌') {
-				await member.send('You got kicked from the server because you did not agree to the rules!');
-				await member.kick(`${memberName} did not agree to the rules.`);
+				try {
+					member.send('You got kicked from the server because you did not agree to the rules!');
+					member.kick(`${memberName} did not agree to the rules.`);
+				}
+				catch (err) {
+					console.log('An error has occured while kicking an user because he didnt agree to the rules: ' + err);
+				}
 			}
 		}
 
-		await reaction.users.remove(member);
+		reaction.users.remove(member);
 		break;
 
 	default:
