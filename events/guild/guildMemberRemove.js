@@ -1,5 +1,5 @@
 module.exports = (client, Discord, member) => {
-    client.channels.cache.get(process.env.MEMBERUPDATECHANNEL)
+	client.channels.cache.get(process.env.MEMBERUPDATECHANNEL)
 		.send({
 			embed: {
 				title: 'A user left the server!',
@@ -30,4 +30,4 @@ module.exports = (client, Discord, member) => {
 				timestamp: new Date(),
 			},
 		});
-}
+};

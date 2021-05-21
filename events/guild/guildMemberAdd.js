@@ -32,6 +32,4 @@ module.exports = (client, Discord, member) => {
 				timestamp: new Date(),
 			},
 		});
-
-	member.roles.add(basicRoles).catch(err => console.log('An error has occured while adding basic roles to a new member! ' + err));
 };
