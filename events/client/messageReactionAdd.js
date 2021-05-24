@@ -65,7 +65,10 @@ module.exports = async (client, Discord, reaction, user) => {
 				member.roles.add('841083180097208340');
 			}).catch(console.error());
 			break;
-
+		case 'deeprock':
+			// Assigns the 'Deep Rock' role to the member
+			member.roles.add('846499645811195915');
+			break;
 		default:
 			break;
 		}
