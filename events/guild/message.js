@@ -49,7 +49,7 @@ module.exports = (Discord, client, message) => {
 
 	if(message.author.bot) return;
 
-	if(!content.startsWith(prefix)) {
+	if(!content.startsWith(prefix) && content.length > 0) {
 
 		if(censor.checkMessage(content)) {
 			message.delete()
