@@ -49,15 +49,16 @@ module.exports = (Discord, client, message) => {
 
 	if(message.author.bot) return;
 
-	if(!content.startsWith(prefix) && content.length > 0) {
-
-		if(censor.checkMessage(content)) {
-			message.delete()
-				.then(() => message.channel.send(`${message.author} said: ${censor.censorMessage(content, '#')}`))
-				.catch(err => {
-					console.log('An error occurred while censoring a message: ' + err);
-					return message.channel.send('Unfortunately an error has occurred :(');
-				});
+	if(!content.startsWith(prefix)) {
+		if(content.length > 0) {
+			if(censor.checkMessage(content)) {
+				message.delete()
+					.then(() => message.channel.send(`${message.author} said: ${censor.censorMessage(content, '#')}`))
+					.catch(err => {
+						console.log('An error occurred while censoring a message: ' + err);
+						return message.channel.send('Unfortunately an error has occurred :(');
+					});
+			}
 		}
 		return;
 	}
