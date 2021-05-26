@@ -1,5 +1,4 @@
 module.exports = (client, Discord, member) => {
-	const basicRoles = ['827285756615458837', '841081335455678464'];
 
 	client.channels.cache.get(process.env.MEMBERUPDATECHANNEL)
 		.send({
