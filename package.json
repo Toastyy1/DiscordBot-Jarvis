@@ -17,6 +17,7 @@
     "dotenv": "^8.6.0",
     "eslint": "^7.26.0",
     "fs": "^0.0.1-security",
+    "mongoose": "^5.12.11",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7"
   }
