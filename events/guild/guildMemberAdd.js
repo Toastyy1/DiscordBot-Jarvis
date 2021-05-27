@@ -18,6 +18,7 @@ module.exports = async (client, Discord, member) => {
 					result.memberUpdateChannel,
 					result.color,
 					result.message,
+					result.title,
 				];
 			}
 			finally {
@@ -28,7 +29,7 @@ module.exports = async (client, Discord, member) => {
 
 	client.channels.cache.get(data[0]).send({
 		embed: {
-			title: 'A new user joined the server!',
+			title: data[3],
 			color: data[1],
 			thumbnail: {
 				url: member.user.displayAvatarURL(),
