@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 const mongo = require('../../util/mongo');
 const welcomeSchema = require('../../schemas/guildMemberAdd-schema');
 const cache = {};
-=======
-module.exports = (client, Discord, member) => {
->>>>>>> develop
 
 module.exports = async (client, Discord, member) => {
 	const { guild } = member;
