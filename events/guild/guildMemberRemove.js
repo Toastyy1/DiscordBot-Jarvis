@@ -1,9 +1,37 @@
-module.exports = (client, Discord, member) => {
-	client.channels.cache.get(process.env.MEMBERUPDATECHANNEL)
+const mongo = require('../../util/mongo');
+const goodbyeSchema = require('../../schemas/guildMemberRemove-schema');
+const cache = {};
+
+module.exports = async (client, Discord, member) => {
+	const { guild } = member;
+
+	let data = cache[guild.id];
+
+	if(!data) {
+		console.log('Fetching from database!');
+
+		await mongo().then(async mongoose => {
+			try {
+				const result = goodbyeSchema.findOne({ _id: guild.id });
+
+				cache[guild.id] = data = [
+					result.memberUpdatechannel,
+					result.color,
+					result.message,
+					result.title,
+				];
+			}
+			finally {
+				mongoose.connection.close();
+			}
+		});
+	}
+
+	client.channels.cache.get(data[0])
 		.send({
 			embed: {
-				title: 'A user left the server!',
-				color: 	0xffcc00,
+				title: data[3],
+				color: 	data[1],
 				thumbnail: {
 					url: member.user.displayAvatarURL(),
 				},
@@ -15,7 +43,7 @@ module.exports = (client, Discord, member) => {
 					},
 					{
 						name: 'Goodbye ' + '`' + member.displayName + '`' + '!',
-						value: 'It was nice having you as a member',
+						value: data[2],
 						inline: true,
 					},
 					{

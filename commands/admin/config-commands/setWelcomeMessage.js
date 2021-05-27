@@ -1,5 +1,5 @@
-const mongo = require('../../util/mongo');
-const welcomeSchema = require('../../schemas/guildMemberAdd-schema');
+const mongo = require('../../../util/mongo');
+const welcomeSchema = require('../../../schemas/guildMemberAdd-schema');
 
 module.exports = {
 	name: 'setwelcomemessage',

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { reqString } = require('./templateReqTypes/reqString');
 
-const newMemberSchema = mongoose.Schema({
+const memberRemovedSchema = mongoose.Schema({
 	_id: reqString,
     memberUpdateChannel: reqString,
     color: reqString,
@@ -10,4 +10,4 @@ const newMemberSchema = mongoose.Schema({
     title: reqString,
 });
 
-module.exports = mongoose.model('guildMemberAdd', newMemberSchema);
+module.exports = mongoose.model('guildMemberRemoved', memberRemovedSchema);
