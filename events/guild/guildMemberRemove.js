@@ -12,10 +12,10 @@ module.exports = async (client, Discord, member) => {
 
 		await mongo().then(async mongoose => {
 			try {
-				const result = goodbyeSchema.findOne({ _id: guild.id });
+				const result = await goodbyeSchema.findOne({ _id: guild.id });
 
 				cache[guild.id] = data = [
-					result.memberUpdatechannel,
+					result.memberUpdateChannel,
 					result.color,
 					result.message,
 					result.title,
@@ -59,3 +59,5 @@ module.exports = async (client, Discord, member) => {
 			},
 		});
 };
+
+module.exports.cache = cache;

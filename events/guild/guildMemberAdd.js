@@ -2,6 +2,7 @@ const mongo = require('../../util/mongo');
 const welcomeSchema = require('../../schemas/guildMemberAdd-schema');
 const cache = {};
 
+
 module.exports = async (client, Discord, member) => {
 	const { guild } = member;
 
@@ -58,3 +59,5 @@ module.exports = async (client, Discord, member) => {
 		},
 	});
 };
+
+module.exports.cache = cache;

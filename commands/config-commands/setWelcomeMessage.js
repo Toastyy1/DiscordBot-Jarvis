@@ -1,5 +1,6 @@
-const mongo = require('../../../util/mongo');
-const welcomeSchema = require('../../../schemas/guildMemberAdd-schema');
+const mongo = require('../../util/mongo');
+const welcomeSchema = require('../../schemas/guildMemberAdd-schema');
+const { cache } = require('../../events/guild/guildMemberAdd');
 
 module.exports = {
 	name: 'setwelcomemessage',
@@ -34,6 +35,8 @@ module.exports = {
 				}, {
 					upsert: true,
 				});
+
+				cache[guild.id] = [memberUpdateChannel, color, messageText, title];
 			}
 			finally {
 				mongoose.connection.close();

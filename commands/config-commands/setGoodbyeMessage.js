@@ -1,5 +1,6 @@
-const mongo = require('../../../util/mongo');
-const goodbyeSchema = require('../../../schemas/guildMemberRemove-schema');
+const mongo = require('../../util/mongo');
+const goodbyeSchema = require('../../schemas/guildMemberRemove-schema');
+const { cache } = require('../../events/guild/guildMemberRemove');
 
 module.exports = {
 	name: 'setgoodbyemessage',
@@ -34,6 +35,8 @@ module.exports = {
 				}, {
 					upsert: true,
 				});
+
+				cache[guild.id] = [memberUpdateChannel, color, messageText, title];
 			}
 			finally {
 				mongoose.connection.close();

@@ -1,8 +1,12 @@
 require('dotenv').config();
 const censor = require('chat-censoring');
-const prefix = process.env.PREFIX;
+const mongo = require('../../util/mongo');
+const prefixSchema = require('../../schemas/prefix-schema');
+const cache = {};
 
 const validatePermissions = (permissions) => {
+	// const { Permissions } = require('discord.js');
+	// const validPermissions = Permissions;
 	const validPermissions = [
 		'CREATE_INSTANT_INVITE',
 		'KICK_MEMBERS',
@@ -44,12 +48,36 @@ const validatePermissions = (permissions) => {
 	}
 };
 
-module.exports = (Discord, client, message) => {
+module.exports = async (Discord, client, message) => {
 	const { member, content, guild } = message;
 
 	if(message.author.bot) return;
 
-	if(!content.startsWith(prefix)) {
+	let data = cache[guild.id];
+
+	if(!data) {
+		console.log('Fetching prefix from database!');
+
+		await mongo().then(async mongoose => {
+			try {
+				const result = await prefixSchema.findOne({ _id: guild.id });
+
+				if (result) {
+					cache[guild.id] = data = [result.prefix];
+				}
+				else {
+					cache[guild.id] = data = ['!'];
+				}
+			}
+			finally {
+				mongoose.connection.close();
+			}
+		});
+	}
+
+	const serverPrefix = data[0];
+
+	if(!content.startsWith(serverPrefix)) {
 		if(content.length > 0) {
 			if(censor.checkMessage(content)) {
 				message.delete()
@@ -63,7 +91,7 @@ module.exports = (Discord, client, message) => {
 		return;
 	}
 
-	const args = content.slice(prefix.length).split(';');
+	const args = content.slice(serverPrefix.length).split(' ');
 	const cmdName = args.shift().toLowerCase();
 	const command = message.client.commands.get(cmdName)
        || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
@@ -128,7 +156,7 @@ module.exports = (Discord, client, message) => {
 		args.length < minArgs || (maxArgs !== null && args.length > maxArgs)
 	) {
 		return message.reply(
-			`Wrong syntax! Try ${prefix}${command.name} ${expectedArgs}`,
+			`Wrong syntax! Try ${serverPrefix}${command.name} ${expectedArgs}`,
 		);
 	}
 
@@ -139,3 +167,5 @@ module.exports = (Discord, client, message) => {
 		})
 		.then(() => message.channel.stopTyping(true));
 };
+
+module.exports.cache = cache;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { reqString } = require('./templateReqTypes/reqString');
+const { reqString } = require('./templateReqTypes');
 
 const newMemberSchema = mongoose.Schema({
 	_id: reqString,
