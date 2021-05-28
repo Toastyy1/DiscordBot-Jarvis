@@ -14,12 +14,17 @@ module.exports = async (client, Discord, member) => {
 			try {
 				const result = await goodbyeSchema.findOne({ _id: guild.id });
 
-				cache[guild.id] = data = [
-					result.memberUpdateChannel,
-					result.color,
-					result.message,
-					result.title,
-				];
+				if(result) {
+					cache[guild.id] = data = [
+						result.memberUpdateChannel,
+						result.color,
+						result.message,
+						result.title,
+					];
+				}
+				else {
+					return;
+				}
 			}
 			finally {
 				mongoose.connection.close();
