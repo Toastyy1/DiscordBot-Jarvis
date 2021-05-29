@@ -8,7 +8,6 @@ module.exports = async (client, Discord, reaction, user) => {
 	}
 
 	if(user.bot) return;
-	console.log(`${reaction.message.author}'s message "${reaction.message.content}" removed a reaction!`);
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const reactionRoles = [

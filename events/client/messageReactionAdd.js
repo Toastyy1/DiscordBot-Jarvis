@@ -1,3 +1,7 @@
+const mongo = require('../../util/mongo');
+const messageReactionSchema = require('../../schemas/messageReaction-schema');
+const cache = {};
+
 module.exports = async (client, Discord, reaction, user) => {
 	try {
 		if(reaction.partial) await reaction.fetch();
@@ -8,7 +12,6 @@ module.exports = async (client, Discord, reaction, user) => {
 	}
 
 	if(user.bot) return;
-	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const memberName = member.displayName;
@@ -81,3 +84,5 @@ module.exports = async (client, Discord, reaction, user) => {
 		return;
 	}
 };
+
+module.exports.cache = cache;

@@ -91,7 +91,7 @@ module.exports = async (Discord, client, message) => {
 		return;
 	}
 
-	const args = content.slice(serverPrefix.length).split(' ');
+	const args = content.slice(serverPrefix.length).split(/ +/);
 	const cmdName = args.shift().toLowerCase();
 	const command = message.client.commands.get(cmdName)
        || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
