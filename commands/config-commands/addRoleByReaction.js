@@ -23,15 +23,23 @@ module.exports = {
 		await mongo().then(async mongoose => {
 			try {
 				await messageReactionSchema.findOneAndUpdate({
-					_id: targetMessage,
-					guild: guild.id,
+					_id: guild.id,
+					message: {
+						$elemMatch: {
+							msgId: targetMessage,
+						},
+					},
 				}, {
-					_id: targetMessage,
-					guild: guild.id,
+					_id: guild.id,
 					$push: {
-						reactionRole: [{
-							reaction: targetReaction,
-							role,
+						message: [{
+							msgId: targetMessage,
+							$each: {
+								reactionRole: [{
+									reaction: targetReaction,
+									role,
+								}],
+							},
 						}],
 					},
 
@@ -39,7 +47,15 @@ module.exports = {
 					upsert: true,
 				});
 
-				cache[targetMessage] = [guild.id, [{ targetReaction, role }]];
+				cache[guild.id] = [
+					[{
+						msgId: targetMessage,
+						reactionRole: [{
+							reaction: targetReaction,
+							role,
+						}],
+					}],
+				];
 			}
 			finally {
 				mongoose.connection.close();
