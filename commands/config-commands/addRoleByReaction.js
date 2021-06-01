@@ -45,7 +45,8 @@ module.exports = {
 						});
 					}
 
-				});
+					cache[targetMessage] = [{ reaction: targetReaction, role }];
+				}).then(() => targetMessageObj.react(targetReaction));
 			}
 			finally {
 				mongoose.connection.close();
