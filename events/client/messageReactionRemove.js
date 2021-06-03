@@ -36,6 +36,36 @@ module.exports = async (client, Discord, reaction, user) => {
 			reaction: 'csgo',
 			role: ['841083180097208340', '841082846973394974'],
 		},
+
+		{
+			reaction: 'deeprock',
+			role: ['841083180097208340', '846499645811195915'],
+		},
+
+		{
+			reaction: 'gtfo',
+			role: ['841083180097208340', '849848529278468146'],
+		},
+
+		{
+			reaction: 'minecraft',
+			role: ['841083180097208340', '848184391430963200'],
+		},
+
+		{
+			reaction: 'gtav',
+			role: ['841083180097208340', '848185036209258497'],
+		},
+
+		{
+			reaction: 'rocketleague',
+			role: ['841083180097208340', '848184714811670538'],
+		},
+
+		{
+			reaction: 'lol',
+			role: ['841083180097208340', '848185188131668018'],
+		},
 	];
 
 	if(reaction.message.id === process.env.ROLECLAIMMESSAGE) {
