@@ -71,6 +71,36 @@ module.exports = async (client, Discord, reaction, user) => {
 				member.roles.add('846499645811195915');
 			}).catch(console.error());
 			break;
+		case 'lol':
+			// Assigns the 'LoL' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('848185188131668018');
+			}).catch(console.error());
+			break;
+		case 'rocketleague':
+			// Assigns the 'Rocket League' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('848184714811670538');
+			}).catch(console.error());
+			break;
+		case 'minecraft':
+			// Assigns the 'Minecraft' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('848184391430963200');
+			}).catch(console.error());
+			break;
+		case 'gtav':
+			// Assigns the 'GTA-V' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('848185036209258497');
+			}).catch(console.error());
+			break;
+		case 'gtfo':
+			// Assigns the 'GTFO' role to the member
+			member.roles.add('841082846973394974').then(() => {
+				member.roles.add('849848529278468146');
+			}).catch(console.error());
+			break;
 		default:
 			break;
 		}
