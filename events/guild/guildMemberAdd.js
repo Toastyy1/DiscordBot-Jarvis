@@ -6,6 +6,8 @@ const cache = {};
 module.exports = async (client, Discord, member) => {
 	const { guild } = member;
 
+	await member.roles.add('852615800434196501');
+
 	let data = cache[guild.id];
 
 	if (!data) {

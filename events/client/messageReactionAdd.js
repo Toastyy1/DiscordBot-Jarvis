@@ -8,20 +8,23 @@ module.exports = async (client, Discord, reaction, user) => {
 	}
 
 	if(user.bot) return;
-	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const memberName = member.displayName;
 
 	switch (reaction.message.id) {
 	case '845078187393941505':
-		if(member.roles.cache.size <= 1) {
+		if(member.roles.cache.size <= 2) {
 			if(reaction.emoji.name === '✅') {
 				// Assigns the 'Roles:' role to the member
-				member.roles.add('841081335455678464').then(() => {
+				member.roles.add('852085441745911838').then(() => {
 
-					// Assigns the 'User' role to the member
-					member.roles.add('827285756615458837');
+					// Assigns the 'Recruit' role to the member
+					member.roles.add('852065782317580339');
+
+				}).then(() => {
+					if(member.roles.cache.has('852615800434196501')) member.roles.remove('852615800434196501');
+
 				}).catch((err) => {
 					console.log('An error has occured while adding the basic roles to a new member: ' + err);
 					reaction.message.channel.send('Unfortunately, I wasn\'t able to assign you your roles. Try again or report the problem');
@@ -40,71 +43,6 @@ module.exports = async (client, Discord, reaction, user) => {
 		}
 
 		reaction.users.remove(member);
-		break;
-	case '845101137816059934':
-		switch (reaction.emoji.name) {
-		case 'developer':
-			// Assigns the 'Coder' role to the member
-			member.roles.add('827332590620246056').catch(console.error());
-			break;
-		case 'stackoverflow':
-			// Assigns the 'StackOverflow' role to the member
-			member.roles.add('835926532723703849').catch(console.error());
-			break;
-		case 'age16':
-			// Assigns the '16+' role to the member
-			member.roles.add('827622099270762507').catch(console.error());
-			break;
-		case 'age18':
-			// Assigns the '18+' role to the member
-			member.roles.add('827622498689351711').catch(console.error());
-			break;
-		case 'csgo':
-			// Assigns the 'CSGO' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('841083180097208340');
-			}).catch(console.error());
-			break;
-		case 'deeprock':
-			// Assigns the 'Deep Rock' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('846499645811195915');
-			}).catch(console.error());
-			break;
-		case 'lol':
-			// Assigns the 'LoL' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('848185188131668018');
-			}).catch(console.error());
-			break;
-		case 'rocketleague':
-			// Assigns the 'Rocket League' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('848184714811670538');
-			}).catch(console.error());
-			break;
-		case 'minecraft':
-			// Assigns the 'Minecraft' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('848184391430963200');
-			}).catch(console.error());
-			break;
-		case 'gtav':
-			// Assigns the 'GTA-V' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('848185036209258497');
-			}).catch(console.error());
-			break;
-		case 'gtfo':
-			// Assigns the 'GTFO' role to the member
-			member.roles.add('841082846973394974').then(() => {
-				member.roles.add('849848529278468146');
-			}).catch(console.error());
-			break;
-		default:
-			break;
-		}
-
 		break;
 
 	default:
