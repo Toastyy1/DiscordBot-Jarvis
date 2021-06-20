@@ -96,7 +96,7 @@ module.exports = async (Discord, client, message) => {
 	const command = message.client.commands.get(cmdName)
        || message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
-	if(!command) return message.reply(`"${content}" is not a valid command!`);
+	if(!command) return;
 
 	let {
 		permissions = [],

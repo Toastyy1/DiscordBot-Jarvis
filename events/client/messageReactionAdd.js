@@ -11,10 +11,11 @@ module.exports = async (client, Discord, reaction, user) => {
 
 	const member = await reaction.message.guild.members.fetch(user.id);
 	const memberName = member.displayName;
+	const standardRole = await member.guild.roles.fetch('852615800434196501');
 
 	switch (reaction.message.id) {
 	case '845078187393941505':
-		if(member.roles.cache.size <= 2) {
+		if(member.roles.cache.has(standardRole.id)) {
 			if(reaction.emoji.name === '✅') {
 				// Assigns the 'Roles:' role to the member
 				member.roles.add('852085441745911838').then(() => {
@@ -45,7 +46,5 @@ module.exports = async (client, Discord, reaction, user) => {
 		reaction.users.remove(member);
 		break;
 
-	default:
-		return;
 	}
 };
