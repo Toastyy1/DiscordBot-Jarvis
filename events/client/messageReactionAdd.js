@@ -40,6 +40,7 @@ module.exports = async (client, Discord, reaction, user) => {
 	}
 
   if(!data) return;
+  if(!data.find(x => x.reaction.split(':')[1] === reaction.emoji.name)) await reaction.remove();
 
 	const rolesToAdd = [];
 
