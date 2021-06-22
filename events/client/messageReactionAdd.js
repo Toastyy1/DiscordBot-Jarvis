@@ -24,28 +24,28 @@ module.exports = async (client, Discord, reaction, user) => {
 			try {
 				const results = await messageReactionSchema.findById(message.id).lean();
 
-        if(!results) return;
+				if(!results) return;
 
 				const reactionRoles = results.reactionRole.map(obj => ({ reaction: obj.reaction, role: obj.role }));
 
 				cache[message.id] = data = reactionRoles;
 			}
-      catch (error) {
-        console.log('An error has occured while getting data from mongo! Error: ' + err);
-      }
+			catch (error) {
+				console.log('An error has occured while getting data from mongo! Error: ' + error);
+			}
 			finally {
 				mongoose.connection.close();
 			}
 		});
 	}
 
-  if(!data) return;
-  if(!data.find(x => x.reaction.split(':')[1] === reaction.emoji.name)) await reaction.remove();
+	if(!data) return;
+	if(!data.find(x => x.reaction.split(':')[1] === reaction.emoji.name)) await reaction.remove();
 
 	const rolesToAdd = [];
 
 	data.forEach(element => {
-    if(element.reaction.split(':')[1] !== reaction.emoji.name) return;
+		if(element.reaction.split(':')[1] !== reaction.emoji.name) return;
 		rolesToAdd.push(element.role);
 	});
 
