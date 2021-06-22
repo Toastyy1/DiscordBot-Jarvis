@@ -8,7 +8,7 @@ module.exports = async (client, Discord, reaction, user) => {
 		if(user.partial) await user.fetch();
 	}
 	catch (e) {
-		return console.log('An error has occured while handling the "messageReactionAdd" event: ' + e);
+		return console.log('Could not fetch reaction or user. Error: ' + e);
 	}
 
 	if(user.bot) return;
@@ -24,28 +24,35 @@ module.exports = async (client, Discord, reaction, user) => {
 			try {
 				const results = await messageReactionSchema.findById(message.id).lean();
 
+        if(!results) return;
+
 				const reactionRoles = results.reactionRole.map(obj => ({ reaction: obj.reaction, role: obj.role }));
 
 				cache[message.id] = data = reactionRoles;
 			}
+      catch (error) {
+        console.log('An error has occured while getting data from mongo! Error: ' + err);
+      }
 			finally {
 				mongoose.connection.close();
 			}
 		});
 	}
 
+  if(!data) return;
+
 	const rolesToAdd = [];
 
 	data.forEach(element => {
-		if(element.reaction.split(':')[1] !== reaction.emoji.name) return;
+    if(element.reaction.split(':')[1] !== reaction.emoji.name) return;
 		rolesToAdd.push(element.role);
 	});
 
 	member.roles.add(rolesToAdd)
 		.then(() => console.log('Successfully assigned roles to the member!'))
-		.catch(async err => {
-			await member.send('Unfortunately an error has occured while assigning your selected role :(');
-			console.log('An error has occurred while assigning roles to the member!' + err);
+		.catch(err => {
+			member.send('Unfortunately an error has occured while assigning your selected role :(');
+			console.log('An error has occurred while assigning roles to the member! ' + err);
 		});
 
 };
