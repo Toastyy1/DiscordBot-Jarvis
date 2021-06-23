@@ -11,7 +11,7 @@ const messageReactionSchema = mongoose.Schema({
 		role: reqString,
     isCategoryRole: {
       type: Boolean,
-      required: false,
+      required: true,
     },
 	}],
 });
