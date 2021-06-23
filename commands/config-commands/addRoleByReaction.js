@@ -22,7 +22,7 @@ module.exports = {
     args[2].startsWith('<@') ? role = args[2].substring(3, args[2].length - 1) : role = args[2];
 
     let isCategoryRole;
-    isCategoryRole && args[3] === 'true'? isCategoryRole = true : isCategoryRole = false;
+    args[3] && args[3] === 'true'? isCategoryRole = true : isCategoryRole = false;
 
     await mongo().then(async mongoose => {
       try {
