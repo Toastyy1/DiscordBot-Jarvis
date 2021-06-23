@@ -26,12 +26,11 @@ module.exports = async (client, Discord, reaction, user) => {
 
         if (!results) return;
 
-        const reactionRoles = results.reactionRole.map(obj => ({ reaction: obj.reaction, role: obj.role, isCategoryRole: obj.isCategoryRole }));
-
-        cache[message.id] = data = reactionRoles;
+        cache[message.id] = data = results.reactionRole;
       }
       catch (error) {
         console.log('An error has occured while getting data from mongo! Error: ' + error);
+        member.send('An error has occured while trying to fetch ractions & roles from the db! Error message: ' + error)
       }
       finally {
         mongoose.connection.close();
@@ -48,7 +47,6 @@ module.exports = async (client, Discord, reaction, user) => {
     if (element.reaction.split(':')[1] !== reaction.emoji.name) return;
     rolesToAdd.push(element.role);
   });
-  console.log(rolesToAdd);
 
   member.roles.add(rolesToAdd)
     .then(() => console.log('Successfully assigned roles to the member!'))
