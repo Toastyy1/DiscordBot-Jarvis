@@ -55,7 +55,7 @@ module.exports = {
             });
           }
 
-          // cache[targetMessage] = [{ reaction: targetReaction, role, isCategoryRole }, ...(doc?.reactionRole.toObject() ?? [])]
+          cache[targetMessage] = [{ reaction: targetReaction, role, isCategoryRole }, ...(doc?.reactionRole.toObject() ?? [])]
 
         }).then(() => targetMessageObj.react(targetReaction));
       }
