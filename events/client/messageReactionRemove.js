@@ -1,78 +1,58 @@
+const mongo = require('../../util/mongo');
+const messageReactionSchema = require('../../schemas/messageReaction-schema');
+const cache = {};
+
 module.exports = async (client, Discord, reaction, user) => {
-	try {
-		if(reaction.partial) await reaction.fetch();
-		if(user.partial) await user.fetch();
-	}
-	catch (e) {
-		return console.log('An error has occured while handling the "messageReactionAdd" event: ' + e);
-	}
+  try {
+    if (reaction.partial) await reaction.fetch();
+    if (user.partial) await user.fetch();
+  }
+  catch (e) {
+    return console.log('An error has occured while handling the "messageReactionAdd" event: ' + e);
+  }
 
-	if(user.bot) return;
-	console.log(`${reaction.message.author}'s message "${reaction.message.content}" removed a reaction!`);
+  if (user.bot) return;
 
-	const member = await reaction.message.guild.members.fetch(user.id);
-	const reactionRoles = [
-		{
-			reaction: 'develop',
-			role: '827332590620246056',
-		},
+  const member = await reaction.message.guild.members.fetch(user.id);
+  const { message } = reaction;
 
-		{
-			reaction: 'stackoverflow',
-			role: '835926532723703849',
-		},
+  let data = cache[message.id];
 
-		{
-			reaction: 'age16',
-			role: '827622099270762507',
-		},
+  if (!data) {
+    console.log('Fetching reactions & roles from database!');
+    await mongo().then(async mongoose => {
+      try {
+        const result = await messageReactionSchema.findById(message.id).lean();
 
-		{
-			reaction: 'age18',
-			role: '827622498689351711',
-		},
+        if (!result) return console.log('No database entry found for this message');
 
-		{
-			reaction: 'csgo',
-			role: ['841083180097208340', '841082846973394974'],
-		},
+        cache[message.id] = data = result.reactionRole
 
-		{
-			reaction: 'deeprock',
-			role: ['841083180097208340', '846499645811195915'],
-		},
+      } catch (err) {
+        console.log('An error has occured while fetching reactions & roles from the database: ' + err);
+        member.send('Unfortunately an error has occured while removing your role :( Please contact the server-/bot owner or try again in a few minutes!');
+      } finally {
+        mongoose.connection.close();
+      }
+    });
+  }
 
-		{
-			reaction: 'gtfo',
-			role: ['841083180097208340', '849848529278468146'],
-		},
+  if (!data) return;  
 
-		{
-			reaction: 'minecraft',
-			role: ['841083180097208340', '848184391430963200'],
-		},
+  let rolesToRemove = [];
 
-		{
-			reaction: 'gtav',
-			role: ['841083180097208340', '848185036209258497'],
-		},
+  data.forEach(element => {
+    if (element.reaction.split(':')[1] !== reaction.emoji.name || element.isCategoryRole) return;
+    rolesToRemove.push(element.role);
+  });  
 
-		{
-			reaction: 'rocketleague',
-			role: ['841083180097208340', '848184714811670538'],
-		},
+  member.roles.remove(rolesToRemove)
+    .then(() => console.log('Successfully removed roles!'))
+    .catch(err => {
+      member.send('Unfortunately an error has occured while removing your selected role :( Try again later or contact the server / bot admin');
+      console.log('An error has occurred while removing roles from member! ' + err);
+    })
 
-		{
-			reaction: 'lol',
-			role: ['841083180097208340', '848185188131668018'],
-		},
-	];
-
-	if(reaction.message.id === process.env.ROLECLAIMMESSAGE) {
-		member.roles
-			.remove(
-				reactionRoles.find((rr) => rr.reaction === reaction.emoji.name).role,
-			)
-			.catch(console.error());
-	}
 };
+
+module.exports.cache = cache;

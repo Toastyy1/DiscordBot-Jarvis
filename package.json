@@ -1,7 +1,7 @@
 {
-  "name": "discord-test-bot",
+  "name": "Discord bot Jarvis",
   "version": "1.0.0",
-  "description": "A test bot for discord",
+  "description": "A useful and easy to use discord bot for a better server management",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,16 +9,21 @@
   "keywords": [
     "discord"
   ],
-  "author": "Marcel Neber",
+  "author": {
+    "name": "Toasty65",
+    "email": "toasty65.dev@gmail.com",
+    "url": "https://github.com/Toasty65"
+  },
+  "bugs": "https://github.com/Toasty65/DiscordBot-Jarvis/issues",
+  "repository": "https://github.com/Toasty65/DiscordBot-Jarvis",
   "license": "ISC",
   "dependencies": {
     "chat-censoring": "^1.0.6",
-    "discord-buttons": "^3.2.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
-    "eslint": "^7.27.0",
-    "fs": "^0.0.1-security",
-    "mongoose": "^5.12.11",
+    "eslint": "^7.29.0",
+    "fs": "0.0.1-security",
+    "mongoose": "^5.12.14",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7"
   }

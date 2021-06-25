@@ -2,6 +2,16 @@
 
 ## [Unreleased](https://github.com/Toasty65/Discord-Bot/compare/v0.0.8...HEAD)
 
+### Added
+
+- The usage of a database to provide per-server settings
+- Multiple 'config-commands' e.g. for change the bot's prefix
+- The events 'messageReactionAdd' and 'messageReactionRemove' are no longer 'hard-coded'. Instead, they work dynamiclly now
+
+### Removed
+
+- 'Hard-coding' in 'messageReactionAdd' and 'messageReactionRemove' events
+
 ## [v0.0.8.1](https://github.com/Toasty65/Discord-Bot/compare/v0.0.8...v0.0.8.1) - 21.05.2021
 
 ### Added
