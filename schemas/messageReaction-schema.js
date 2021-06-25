@@ -9,6 +9,10 @@ const messageReactionSchema = mongoose.Schema({
 		_id: false,
 		reaction: reqString,
 		role: reqString,
+    isCategoryRole: {
+      type: Boolean,
+      required: true,
+    },
 	}],
 });
 
