@@ -9,7 +9,10 @@ module.exports = async (client, Discord, member) => {
 	// Adding the 'Roles:' role
 	await member.roles.add('852085441745911838');
 	// Adding the 'Not yet verified' role
-	await member.roles.add('852615800434196501');
+	//await member.roles.add('852615800434196501');
+
+  // Adding the 'Recruit' role (TEMPORARILY SOLUTION)
+  await member.roles.add('852065782317580339');
 
 	let data = cache[guild.id];
 
