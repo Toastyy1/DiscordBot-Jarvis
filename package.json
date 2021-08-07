@@ -1,5 +1,5 @@
 {
-  "name": "Discord bot Jarvis",
+  "name": "DiscordBot_Jarvis",
   "version": "1.0.0",
   "description": "A useful and easy to use discord bot for a better server management",
   "main": "index.js",
